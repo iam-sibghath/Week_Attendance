@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Attendance Reports</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            margin: auto;
+            display: flex;
+            gap: 50px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .banner {
+            text-align: center;
+            background-color: #3b145b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .detail {
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            border: none;
+            background: transparent;
+            text-align: right;
+            font-size: 16px;
+            width: 100px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            font-size: 16px;
+            width: 150px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #edit-btn { background-color: #098409; color: white; }
+        #save-btn { background-color: #3340c6; color: white; }
+        
+        .chart-container {
+            margin-top: 20px;
+            text-align: center;
+        }  
+        
+        @media (max-width: 1200px) {
+        .container {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .grid {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .detail {
+            flex: 1 1 100%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 120px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        body {
+            padding: 15px;
+        }
+
+        .container {
+            gap: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .button-container {
+            flex-direction: column;
+        }
+
+        button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .banner {
+            padding: 10px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+        }
+
+        .detail {
+            flex: 1 1 100%;
+            padding: 8px;
+        }
+
+        input {
+            width: 80px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .detail {
+            flex: 1 1 100%;
+            padding: 8px;
+        }
+
+        .banner {
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+        }
+
+        .chart-container {
+            margin-top: 15px;
+        }
+    }
+
+    
+    @media (max-width: 1024px) and (min-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        .card {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .banner {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 768px) and (min-width: 480px) {
+        .container {
+            padding: 5px;
+        }
+
+        .card {
+            width: 100%;
+        }
+
+        .banner {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .button-container {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) and (min-width: 320px) {
+        .banner {
+        width: 98%;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .banner h1 {
+        font-size: 20px;
+    }
+
+    .banner p {
+        font-size: 12px;
+    }
+        .card {
+            width: 95%;
+            padding: 12px;
+        }
+
+        .detail {
+            width: 95%;
+            padding: 10px;
+        }
+        .button-container{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        button {
+            width: 40%;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+    </style>
+</head>
+<body>
+  <div class="banner">
+    <h1>Weekly Attendance Reports</h1>
+    <p>Upload or edit employees' attendance records for the week.</p>
+</div>
+    <div class="container">
+        
+        <div class="card">
+            <h2>This Week Reports</h2>
+            <div class="grid">
+                <div class="detail"><label>Total Employees:</label> <input type="number" id="total-employees" value="100"></div>
+                <div class="detail"><label>Total Days Working:</label> <input type="number" id="total-days-working" value="5"></div>
+                <div class="detail"><label>Employees Present:</label> <input type="number" id="employees-present" value="96"></div>
+                <div class="detail"><label>Total Holidays:</label> <input type="number" id="total-holidays" value="0"></div>
+                <div class="detail"><label>Employees on Leave:</label> <input type="number" id="employees-on-leave" value="4"></div>
+                <div class="detail"><label>Approved Leaves:</label> <input type="number" id="approved-leaves" value="4"></div>
+                <div class="detail"><label>Unapproved Leaves:</label> <input type="number" id="unapproved-leaves" value="0"></div>
+                <div class="detail"><label>Attendance Percentage (%):</label> <input type="number" id="present-percentage" value="96" readonly></div>
+                <div class="detail"><label>Average Overtime Hours:</label> <input type="text" id="average-overtime-hours" value="1hr 4min"></div>
+            </div>
+            <div class="button-container">
+                <button id="edit-btn">Edit</button>
+                <button id="save-btn">Save</button>
+            </div>
+        </div>
+
+        <div class="card chart-container">
+            <h2>Weekly Attendance Percentage</h2>
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        let attendanceChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [96, 4],
+                    backgroundColor: ['#399918', '#FB773C'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        document.getElementById('edit-btn').addEventListener('click', function() {
+            document.querySelectorAll('input').forEach(input => input.removeAttribute('readonly'));
+        });
+
+        document.getElementById('save-btn').addEventListener('click', function() {
+            let totalEmployees = parseInt(document.getElementById('total-employees').value);
+            let employeesPresent = parseInt(document.getElementById('employees-present').value);
+            let employeesOnLeave = parseInt(document.getElementById('employees-on-leave').value);
+            
+            if (employeesPresent + employeesOnLeave > totalEmployees) {
+                alert("Total present + on leave cannot exceed total employees!");
+                return;
+            }
+
+            let attendancePercentage = ((employeesPresent / totalEmployees) * 100).toFixed(2);
+            document.getElementById('present-percentage').value = attendancePercentage;
+
+            attendanceChart.data.datasets[0].data = [employeesPresent, totalEmployees - employeesPresent];
+            attendanceChart.update();
+
+            document.querySelectorAll('input').forEach(input => input.setAttribute('readonly', true));
+        });
+    </script>
+</body>
+</html>
